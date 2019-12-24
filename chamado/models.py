@@ -13,7 +13,7 @@ class Cliente(User):
         verbose_name_plural = 'Clientes'
 
 class Analista(User):
-    
+    is_staff = True
     class Meta:
         verbose_name = 'Analista'
         verbose_name_plural = 'Analistas'

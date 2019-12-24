@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def chamados_list(request):
+    return render(request, 'chamado/chamados_list.html', {})
