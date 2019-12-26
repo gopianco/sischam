@@ -39,6 +39,7 @@ class Chamado(models.Model):
         ("CONCLUIDO", 'Concluido'),
     ]
 
+    titulo_chamado = models.CharField(max_length=100, blank=False, null=False)
     id_chamado = models.AutoField(primary_key=True)
     tipo_chamado = models.CharField(max_length=20,choices=TIPO_DE_CHAMADO, default='Incidente')
     status= models.CharField(max_length=20, choices=STATUS_DE_CHAMADO, default='Aberto')
@@ -48,5 +49,20 @@ class Chamado(models.Model):
     descricao = models.TextField()
     solucao = models.TextField()
     #chat = models.ForeignKey()
-    data_abertura = models.DateField(auto_now=True)
+    data_abertura = models.DateField(default=timezone.now)
+    data_alteracao = models.DateField(default=timezone.now)
+    
+
+    def abrir_chamado(self):
+        self.status = "ABERTO"
+        self.data_abertura = timezone.now()
+        self.save()
+    
+    def alterar_chamado(self):
+        self.data_alteracao = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.titulo_chamado
+
 
