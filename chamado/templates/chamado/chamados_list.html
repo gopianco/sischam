@@ -11,8 +11,8 @@
     <title>Sistema Abertura de Chamado</title>
   </head>
   <body>
-  <div class="container" style="background-color: #343a40;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <div class="container-fluid" style="background-color: #343a40;">
+    <nav class="navbar fixed-top-lg navbar-expand-lg navbar-dark bg-dark" >
         <a class="navbar-brand" href="#">Sischam</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -49,36 +49,38 @@
     </div>
       
 
-      <div class="container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Titulo</th>
-              <th>Descrição</th>
-              <th>Status</th>
-              <th>Data Abertura</th>
-              <th>Última atualização</th>
-              <th>Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for chamado in chamados%}
-            <tr> 
-              <td scope="row">{{chamado.id_chamado}}</td>
-              <td>{{chamado.titulo_chamado}}</td>
-              <td>{{chamado.descricao}}</td>
-              <td>{{chamado.status}}</td>
-              <th>{{chamado.data_abertura}}</th>
-              <th>{{chamado.data_alteracao}}</th>
-              <td><i class="fas fa-check-circle"><span></span></i></td>
-            </tr>
-          {% endfor %}
-  
-          </tbody>
-        </table>
+    <div class="container-fluid">
+      <table class="table center" >
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="marcar_todos"></th>
+            <th>id</th>
+            <th>Titulo</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Data Abertura</th>
+            <th>Última atualização</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for chamado in chamados%}
+          <tr>
+            <th><input type="checkbox" id="marcar_chamado"</th> 
+            <td scope="row">{{chamado.id_chamado}}</td>
+            <td>{{chamado.titulo_chamado}}</td>
+            <td>{{chamado.descricao}}</td>
+            <td>{{chamado.status}}</td>
+            <th>{{chamado.data_abertura}}</th>
+            <th>{{chamado.data_alteracao}}</th>
+            <td><i class="fas fa-check-circle"><span></span></i></td>
+          </tr>
+        {% endfor %}
 
-      </div>
+        </tbody>
+      </table>
+
+    </div>
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
