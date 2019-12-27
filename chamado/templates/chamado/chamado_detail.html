@@ -1,0 +1,40 @@
+{% extends 'chamado/base.html' %}
+
+    {% block content %}
+    <div class="container mt-3">
+        <h3>{{chamado.titulo_chamado}}</h3>
+    <p class='text-muted'>{{chamado.cliente | linebreaksbr}} | {{chamado.data_abertura}}</p> 
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <p>ID Chamado: {{chamado.id_chamado}}</p>
+            </div>
+            <div class="col-sm">
+                <p> Última interação: {{chamado.data_alteracao}}</p>
+            </div>
+            <div class="col-sm">
+                <p>Status: {{chamado.status}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container border border-primary mt-2">
+        <p class="font-weight-bold">Descrição:</p>
+        <p>{{chamado.descricao}}</p>
+    </div>
+
+    <div class="container border border-primary mt-2">
+        <p class="font-weight-bold">Solução:</p>
+
+        {% if chamado.solucao %}
+
+            <p>{{chamado.solucao}}</p>
+
+        {% endif %}
+        
+    </div>
+
+
+{% endblock %}

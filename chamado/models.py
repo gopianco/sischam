@@ -46,7 +46,7 @@ class Chamado(models.Model):
     tipo_chamado = models.CharField(max_length=20,choices=TIPO_DE_CHAMADO, default='Incidente')
     status= models.CharField(max_length=20, choices=STATUS_DE_CHAMADO, default='Aberto')
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='chamados')
-    analista = models.ForeignKey(Analista, on_delete=models.CASCADE, related_name='chamados')
+    analista = models.ForeignKey(Analista, on_delete=models.CASCADE, related_name='chamados', blank=True, null=True)
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
     descricao = models.TextField()
     solucao = models.TextField(blank=True, null=True)

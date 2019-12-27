@@ -1,90 +1,47 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <!-- Meta tags Obrigatórias -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% extends 'chamado/base.html' %}
+  
+  {% block content %}
+  <div class="content container-fluid">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <table class="table center" >
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="marcar_todos"></th>
+          <th>id</th>
+          <th>Titulo</th>
+          <th>Descrição</th>
+          <th>Status</th>
+          <th>Data Abertura</th>
+          <th>Última atualização</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for chamado in chamados%}
+        <tr>
+          <th><input type="checkbox" id="marcar_chamado"</th> 
+          <td scope="row">{{chamado.id_chamado}}</td>
+          <td>
+            <a href="{% url 'chamado_detail' pk=chamado.pk%}">
+              {{chamado.titulo_chamado}}
+            </a>
+          </td>
+          <td>{{chamado.descricao}}</td>
+          <td>{{chamado.status}}</td>
+          <th>{{chamado.data_abertura}}</th>
+          <th>{{chamado.data_alteracao}}</th>
+          <td>
+            <a href="{% url 'chamado_edit' pk=chamado.pk %}">
+              <button type="button" class="btn btn-info">
+                Editar
+              </button>
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
 
-    <title>Sistema Abertura de Chamado</title>
-  </head>
-  <body>
-  <div class="container-fluid" style="background-color: #343a40;">
-    <nav class="navbar fixed-top-lg navbar-expand-lg navbar-dark bg-dark" >
-        <a class="navbar-brand" href="#">Sischam</a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navBar">
-            <ul class="navbar-nav mr-auto">                
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(página atual)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Criar Chamado</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Chamados</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    FAQ
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Equipamento</a>
-                        <a class="dropdown-item" href="#">Software</a>
-                        <a class="dropdown-item" href="#">Algo mais aqui</a>
-                    </div>
-                </li>
-            </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Pesquisar</button>
-          </form>
-        </div>
-      </nav>
-    </div>
-      
+      </tbody>
+    </table>
 
-    <div class="container-fluid">
-      <table class="table center" >
-        <thead>
-          <tr>
-            <th><input type="checkbox" id="marcar_todos"></th>
-            <th>id</th>
-            <th>Titulo</th>
-            <th>Descrição</th>
-            <th>Status</th>
-            <th>Data Abertura</th>
-            <th>Última atualização</th>
-            <th>Ação</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for chamado in chamados%}
-          <tr>
-            <th><input type="checkbox" id="marcar_chamado"</th> 
-            <td scope="row">{{chamado.id_chamado}}</td>
-            <td>{{chamado.titulo_chamado}}</td>
-            <td>{{chamado.descricao}}</td>
-            <td>{{chamado.status}}</td>
-            <th>{{chamado.data_abertura}}</th>
-            <th>{{chamado.data_alteracao}}</th>
-            <td><i class="fas fa-check-circle"><span></span></i></td>
-          </tr>
-        {% endfor %}
-
-        </tbody>
-      </table>
-
-    </div>
-    <!-- JavaScript (Opcional) -->
-    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
-</html>
+  </div>
+{% endblock %}
