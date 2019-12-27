@@ -16,9 +16,11 @@ class Equipamento(models.Model):
 class Cliente(User):
     id_cliente = models.AutoField(primary_key=True)
     endereco = models.CharField(max_length=200)
+
     class Meta:
         verbose_name = 'Cliente'
         verbose_name_plural = 'Clientes'
+
 
 class Analista(User):
     id_analista = models.AutoField(primary_key=True)
@@ -45,8 +47,8 @@ class Chamado(models.Model):
     id_chamado = models.AutoField(primary_key=True)
     tipo_chamado = models.CharField(max_length=20,choices=TIPO_DE_CHAMADO, default='Incidente')
     status= models.CharField(max_length=20, choices=STATUS_DE_CHAMADO, default='Aberto')
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='chamados')
-    analista = models.ForeignKey(Analista, on_delete=models.CASCADE, related_name='chamados', blank=True, null=True)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    analista = models.ForeignKey(Analista, on_delete=models.CASCADE, blank=True, null=True)
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
     descricao = models.TextField()
     solucao = models.TextField(blank=True, null=True)

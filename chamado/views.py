@@ -3,12 +3,13 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import redirect
 from django.shortcuts import render
-from .models import Chamado
+from .models import Chamado, Cliente
 from .forms import ChamadoForm
 
 
 def chamados_list(request):
-    chamados = Chamado.objects.filter(cliente=1).order_by('status')
+    cliente = request.user
+    chamados = Chamado.objects.filter(cliente=cliente.id)
     return render(request, 'chamado/chamados_list.html', {'chamados': chamados})
 
 def chamado_details(request, pk):
