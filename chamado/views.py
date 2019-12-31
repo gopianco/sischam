@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import redirect
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Chamado, Cliente
 from .forms import ChamadoForm
@@ -10,7 +9,8 @@ from .forms import ChamadoForm
 @login_required
 def chamados_list(request):
     cliente = request.user
-    chamados = Chamado.objects.filter(cliente=cliente.id)
+    chamados = Chamado.objects.filter(cliente_id=cliente.id)
+    print(cliente.id)
     return render(request, 'chamado/chamados_list.html', {'chamados': chamados})
 
 @login_required
@@ -26,7 +26,7 @@ def chamado_new(request):
             chamado = form.save(commit=False)
             chamado.data_abertura = timezone.now()
             chamado.data_alteracao = timezone.now()
-            chamado.cliente_id = 1
+            chamado.cliente_id = request.user.id
             chamado.save()
             return redirect('chamado_detail', pk=chamado.pk)
 
@@ -43,7 +43,7 @@ def chamado_edit(request, pk):
             chamado = form.save(commit=False)
             chamado.data_abertura = timezone.now()
             chamado.data_alteracao = timezone.now()
-            chamado.cliente_id = 1
+            chamado.cliente_id = request.user.id
             chamado.save()
             return redirect('chamado_detail', pk=chamado.pk)
     else:

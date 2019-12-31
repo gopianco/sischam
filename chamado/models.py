@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 
 class Equipamento(models.Model):
-    id_equipamento = models.AutoField(primary_key=True)
     descricao = models.TextField(max_length=200, blank=False, null=False)
     local = models.TextField(max_length= 100)
 
@@ -14,7 +13,6 @@ class Equipamento(models.Model):
         return self.descricao
 
 class Cliente(User):
-    id_cliente = models.AutoField(primary_key=True)
     endereco = models.CharField(max_length=200)
 
     class Meta:
@@ -23,7 +21,6 @@ class Cliente(User):
 
 
 class Analista(User):
-    id_analista = models.AutoField(primary_key=True)
     class Meta:
         verbose_name = 'Analista'
         verbose_name_plural = 'Analistas'
@@ -44,7 +41,6 @@ class Chamado(models.Model):
     ]
 
     titulo_chamado = models.CharField(max_length=100, blank=False, null=False)
-    id_chamado = models.AutoField(primary_key=True)
     tipo_chamado = models.CharField(max_length=20,choices=TIPO_DE_CHAMADO, default='Incidente')
     status= models.CharField(max_length=20, choices=STATUS_DE_CHAMADO, default='Aberto')
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
