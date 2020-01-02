@@ -10,7 +10,6 @@ from .forms import ChamadoForm
 def chamados_list(request):
     cliente = request.user
     chamados = Chamado.objects.filter(cliente_id=cliente.id)
-    print(cliente.id)
     return render(request, 'chamado/chamados_list.html', {'chamados': chamados})
 
 @login_required
