@@ -2,7 +2,6 @@ from django.test import TestCase, Client
 from .models import Chamado, Cliente, Analista, Equipamento
 from django.utils import timezone
 
-
 class ChamadoTest(TestCase):
 
     def setUp(self):
@@ -30,64 +29,70 @@ class ChamadoTest(TestCase):
         self.assertEqual(self.chamado.status, 'ABERTO' )
     
     def test_template_used(self):
-        """Verifica se é o teplate correto que esta renderizando"""
+        """Verifica se é o template correto que esta renderizando"""
 
-        """self.c = Client()
+        self.c = Client()
 
         self.assertTrue(
             self.c.login(
             username='cliente1',
             password='secret',
             )
-        )"""
-
-        self.c = LoginTest.login_cliente
+        )
 
         response = self.c.post(
             '/', 
             username='cliente1',
             password='secret',
-            follow=True
+            follow=True,
         )
         self.assertTemplateUsed(response, 'chamado/chamados_list.html')
 
 class LoginTest(TestCase):
 
-    credeciais_cliente = {
-        'username': 'testcliente',
-        'password': 'secret',
-    }
-
-    credeciais_analista = {
-        'username': 'testanalista',
-        'password': 'secret',
-    }
     
     def setUp(self):
+        self.credeciais_cliente = {
+            'username': 'testcliente',
+            'password': 'secret',
+        }
+
+        self.credeciais_analista = {
+            'username': 'testanalista',
+            'password': 'secret',
+        }
 
         Cliente.objects.create_user(**self.credeciais_cliente)
         Analista.objects.create_user(**self.credeciais_analista)
     
-    @staticmethod
-    def login_cliente():
-        c = Client()
-        return c.login(**LoginTest.credeciais_cliente)
-
-
-    def test_login_cliente(self):
+   
+    def test_login_Logout_cliente(self):
         """
         Teste de login para cliente
+        """
         
-        self.c = Client()"""
-        self.assertTrue(LoginTest.login_cliente())
+        self.c = Client()
+        self.assertTrue(self.c.login(**self.credeciais_cliente))
+
+        """
+        Teste de logout para cliente
+        """
+
+        self.assertTrue(self.c.logout)
 
     
-    def test_login_analista(self):
+    def test_login_Logout_analista(self):
         """
         Teste de login para analista
         """
         self.a = Client()
         self.assertTrue(self.a.login(**self.credeciais_analista))
+
+        """
+        Teste de logout para analista
+        """
+
+        self.assertTrue(self.a.logout)
 
 
     def test_redirect_login(self):
